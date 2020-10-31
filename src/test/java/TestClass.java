@@ -14,11 +14,13 @@ import org.testng.annotations.Test;
 import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 public class TestClass {
 
     private WebDriver driver;
+    //Page selectors, we use xpath as it allows to search elements by its text.
     private By careers = By.xpath("//a[text()='Careers']");
     private By vacancies = By.xpath("//a[text()='Vacancies']");
     private By testAutomationLink = By.xpath("//a[text()='Test Automation Engineer']");
@@ -38,13 +40,14 @@ public class TestClass {
     private void verifySkillsTest() {
         driver.get("https://ctco.lv/en");
         Actions action = new Actions(driver);
-        action.moveToElement(driver.findElement(careers)).perform();// We use moveToElement to simulate mouse hover action
+        action.moveToElement(driver.findElement(careers)).perform();//We use moveToElement to simulate mouse hover action.
         driver.findElement(vacancies).click();
         driver.findElement(testAutomationLink).click();
         WebDriverWait wait = new WebDriverWait(driver, 5);
-        wait.until(ExpectedConditions.visibilityOfElementLocated(skills));//This part just shows us that we check right skills
-        driver.findElements(skills).stream().map(WebElement::getText).forEach(System.out::println);
-        Assert.assertEquals(driver.findElements(skills).size(), 6);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(skills));//Explicit wait for elements to be visible on page.
+        List<WebElement> elements = driver.findElements(skills);
+        elements.stream().map(WebElement::getText).forEach(System.out::println);//This optional part just shows us that we check right elements.
+        Assert.assertEquals(elements.size(), 5, "Amount of skills is incorrect!");
     }
 
     //We can take a screen shot on test fail here. And it's amazing.
