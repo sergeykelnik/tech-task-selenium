@@ -24,6 +24,7 @@ public class TestClass {
     private By testAutomationLink = By.xpath("//a[text()='Test Automation Engineer']");
     private By skills = By.xpath("//h1[text()='Test Automation Engineer']//following::ul[1]/li");
 
+    //Let's initialize Webdriver here, make browser maximized, and setup an implicit wait.
     @BeforeTest
     private void setuUp() {
         driver = new ChromeDriver();
@@ -31,6 +32,8 @@ public class TestClass {
         driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
     }
 
+
+    //We can use POM model but we don't want do that as we've only one test.
     @Test
     private void verifySkillsTest() throws InterruptedException {
         driver.get("https://ctco.lv/en");
@@ -43,6 +46,7 @@ public class TestClass {
         Assert.assertEquals(driver.findElements(skills).size(), "5");
     }
 
+    //We can take a screen shot on test fail here. And it's amazing.
     @AfterMethod
     public void screenShot(ITestResult result) {
         if (ITestResult.FAILURE == result.getStatus()) {
@@ -58,6 +62,7 @@ public class TestClass {
         }
     }
 
+    //Do not forget to stop Webdriver!
     @AfterTest
     private void tearDown() {
         if (driver != null) {
