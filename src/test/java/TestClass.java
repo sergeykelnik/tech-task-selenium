@@ -1,3 +1,4 @@
+import io.github.bonigarcia.wdm.WebDriverManager;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -29,6 +30,7 @@ public class TestClass {
     //Let's initialize Webdriver here, make browser maximized, and setup an implicit wait.
     @BeforeTest
     private void setuUp() {
+        WebDriverManager.chromedriver().setup();//Automatic Selenium WebDriver binaries management instead of executable path.
         driver = new ChromeDriver();
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
