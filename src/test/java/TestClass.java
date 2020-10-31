@@ -35,15 +35,16 @@ public class TestClass {
 
     //We can use POM model but we don't want do that as we've only one test.
     @Test
-    private void verifySkillsTest() throws InterruptedException {
+    private void verifySkillsTest() {
         driver.get("https://ctco.lv/en");
         Actions action = new Actions(driver);
-        action.moveToElement(driver.findElement(careers)).build().perform();
+        action.moveToElement(driver.findElement(careers)).perform();// We use moveToElement to simulate mouse hover action
         driver.findElement(vacancies).click();
         driver.findElement(testAutomationLink).click();
         WebDriverWait wait = new WebDriverWait(driver, 5);
-        wait.until(ExpectedConditions.visibilityOfElementLocated(skills));
-        Assert.assertEquals(driver.findElements(skills).size(), "5");
+        wait.until(ExpectedConditions.visibilityOfElementLocated(skills));//This part just shows us that we check right skills
+        driver.findElements(skills).stream().map(WebElement::getText).forEach(System.out::println);
+        Assert.assertEquals(driver.findElements(skills).size(), 6);
     }
 
     //We can take a screen shot on test fail here. And it's amazing.
