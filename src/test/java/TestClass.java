@@ -21,13 +21,17 @@ import java.util.concurrent.TimeUnit;
 public class TestClass {
 
     private WebDriver driver;
-    //Page selectors, we use xpath as it allows to search elements by its text.
+    /*
+    Page selectors, we use xpath as it allows to search elements by its text.
+    */
     private By careers = By.xpath("//a[text()='Careers']");
     private By vacancies = By.xpath("//a[text()='Vacancies']");
     private By testAutomationLink = By.xpath("//a[text()='Test Automation Engineer']");
-    private By skills = By.xpath("//h1[text()='Test Automation Engineer']//following::ul[1]/li");
+    private By skills = By.xpath("//h1[text()='Test Automation Engineer']//following::ul[1]/li");//There's an error in test task description: skills are separated by <li> tag, not <br>.
 
-    //Let's initialize Webdriver here, make browser maximized, and setup an implicit wait.
+    /*
+    Let's initialize Webdriver here, make browser maximized, and setup an implicit wait.
+    */
     @BeforeTest
     private void setuUp() {
         WebDriverManager.chromedriver().setup();//Automatic Selenium WebDriver binaries management instead of executable path.
@@ -36,8 +40,9 @@ public class TestClass {
         driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
     }
 
-
-    //We can use POM model but we don't want do that as we've only one test.
+    /*
+    We can use POM model but we don't want do that as we've only one test.
+    */
     @Test
     private void verifySkillsTest() {
         driver.get("https://ctco.lv/en");
@@ -52,7 +57,9 @@ public class TestClass {
         Assert.assertEquals(elements.size(), 5, "Amount of skills is incorrect!");
     }
 
-    //We can take a screen shot on test fail here. And it's amazing.
+    /*
+    We can take a screen shot on test fail here. And it's amazing.
+    */
     @AfterMethod
     public void screenShot(ITestResult result) {
         if (ITestResult.FAILURE == result.getStatus()) {
@@ -68,7 +75,9 @@ public class TestClass {
         }
     }
 
-    //Do not forget to stop Webdriver!
+    /*
+    Do not forget to stop Webdriver!
+    */
     @AfterTest
     private void tearDown() {
         if (driver != null) {
