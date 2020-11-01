@@ -10,4 +10,4 @@ mvn clean test
 
 ### Part 2: Advanced Date Picker
 
-Some description here
+https://docs.google.com/spreadsheets/d/1uNbvkSwVZH_0d2De9IUZkrpknc7Po_FzpvEwqDsiE3k/edit#gid=0
