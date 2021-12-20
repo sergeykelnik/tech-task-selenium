@@ -25,14 +25,14 @@ public class TestClass {
     */
     private By careers = By.xpath("//a[text()='Careers']");
     private By vacancies = By.xpath("//a[text()='Vacancies']");
-    private By position = By.xpath("//a[text()='Java Developer/DevOps Engineer']");
-    private By skills = By.xpath("//h1[text()='Java Developer/DevOps Engineer']//following::ul[1]/li");//There's an error in test task description: skills are separated by <li> tag, not <br>.
+    private By position = By.xpath("//a[text()='TEST AUTOMATION ENGINEER']");
+    private By skills = By.xpath("//h1[text()='TEST AUTOMATION ENGINEER']//following::ul[1]/li");//There's an error in test task description: skills are separated by <li> tag, not <br>.
 
     /*
     Let's initialize Webdriver here, make browser maximized, and setup an implicit wait.
     */
     @BeforeTest
-    private void setuUp() {
+    private void setUp() {
         WebDriverManager.chromedriver().setup();//Automatic Selenium WebDriver binaries management instead of executable path.
         driver = new ChromeDriver();
         driver.manage().window().maximize();
@@ -55,7 +55,7 @@ public class TestClass {
         wait.until(ExpectedConditions.visibilityOfElementLocated(skills));//Explicit wait for elements to be visible on page.
         List<WebElement> elements = driver.findElements(skills);
         elements.stream().map(WebElement::getText).forEach(System.out::println);//This optional part just shows us that we check right elements.
-        Assert.assertEquals(elements.size(), 7, "Amount of skills is incorrect!");
+        Assert.assertEquals(elements.size(), 8, "Amount of skills is incorrect!");
     }
 
     /*
